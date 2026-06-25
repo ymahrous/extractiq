@@ -1,7 +1,7 @@
 from sqlmodel import SQLModel, Field
 from typing import Optional, Dict, Any
 from datetime import datetime, timezone
-from sqlalchemy import Column, JSON  # <--- ADD THIS LINE
+from sqlalchemy import Column, JSON
 import uuid
 
 class Document(SQLModel, table=True):
@@ -14,5 +14,5 @@ class Document(SQLModel, table=True):
 class Extraction(SQLModel, table=True):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), primary_key=True)
     document_id: str = Field(foreign_key="document.id")
-    extracted_data: Dict[str, Any] = Field(default={}, sa_column=Column(JSON)) # <--- CHANGE THIS LINE # Will hold our JSON {"vendor": "Acme", "total": 100}
+    extracted_data: Dict[str, Any] = Field(default={}, sa_column=Column(JSON)) # hold our JSON {"vendor": "Acme", "total": 100}
     confidence_score: float = 0.0
