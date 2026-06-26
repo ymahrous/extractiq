@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+psycopg[binary,pool]
+supabase
+celery[redis]
+redis
+google-genai
+PyMuPDF
+python-dotenv
+python-multipart

@@ -6,13 +6,13 @@ import storage_client
 from tasks import process_document_task
 from fastapi import HTTPException
 
-app = FastAPI(title="ExtractIQ API")
+app = FastAPI(title="API - v1")
 
 @app.on_event("startup")
 def on_startup():
     database.init_db()
 
-@app.post("/test-upload/")
+@app.post("/api/v1/upload/")
 def test_upload(file: UploadFile = File(...), session: Session = Depends(database.get_session)):
     # 1. Read & Upload to Supabase (This is fast, keep it in the API)
     file_bytes = file.file.read()
@@ -40,7 +40,7 @@ def test_upload(file: UploadFile = File(...), session: Session = Depends(databas
         "status": db_doc.status # Will be "PENDING"
     }
 
-@app.get("/documents/")
+@app.get("/api/v1/documents/")
 def get_documents(session: Session = Depends(database.get_session)):
     # We join the Extraction table so we can see the ML results alongside the docs
     docs = session.exec(
@@ -48,7 +48,7 @@ def get_documents(session: Session = Depends(database.get_session)):
     ).all()
     return docs
 
-@app.get("/extraction/{document_id}")
+@app.get("/api/v1/extraction/{document_id}")
 def get_extraction(document_id: str, session: Session = Depends(database.get_session)):
     """Fetches the specific extraction data for a single document"""
     extraction = session.exec(
