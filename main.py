@@ -5,8 +5,18 @@ from sqlmodel import select
 import storage_client
 from tasks import process_document_task
 from fastapi import HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="API - v1")
+
+# Add this right under: app = FastAPI(title="ExtractIQ API")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # In a real enterprise app, you'd put your frontend URL here
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.on_event("startup")
 def on_startup():
