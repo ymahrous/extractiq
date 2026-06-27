@@ -1,4 +1,3 @@
-# tests/test_auth.py
 from models import User
 from auth import get_password_hash
 from sqlalchemy import create_engine

@@ -1,4 +1,3 @@
-# tests/test_api.py
 from sqlmodel import Session, select
 from models import User
 from auth import get_password_hash

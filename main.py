@@ -1,4 +1,4 @@
-# main.py
+import structlog
 from fastapi import FastAPI, UploadFile, File, Depends, HTTPException
 from sqlmodel import Session, select
 import database, models
@@ -9,7 +9,14 @@ from auth_routes import router as auth_router
 from dependencies import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="ExtractIQ API")
+structlog.configure(
+    processors=[
+        structlog.processors.add_log_level,
+        structlog.processors.JSONRenderer()
+    ])
+logger = structlog.get_logger("edocai.api")
+
+app = FastAPI(title="edocAI API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,6 +30,7 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
     database.init_db()
+    logger.info("edocAI API started successfully.")
 
 app.include_router(auth_router)
 

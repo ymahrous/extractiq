@@ -1,4 +1,3 @@
-# auth_routes.py
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlmodel import Session, select
 from pydantic import BaseModel

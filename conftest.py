@@ -3,7 +3,7 @@ import os
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlmodel import SQLModel, Session # <--- ADDED SQLModel HERE
+from sqlmodel import SQLModel, Session
 from models import User, Document, Extraction
 from database import get_session
 from main import app

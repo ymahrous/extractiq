@@ -4,7 +4,7 @@ from sqlmodel import Session, select
 from database import engine
 from models import Document, Extraction
 from celery_app import celery_app
-import ai_extractor # <--- IMPORT OUR NEW AI MODULE
+import ai_extractor
 
 @celery_app.task
 def process_document_task(document_id: str):
@@ -20,9 +20,6 @@ def process_document_task(document_id: str):
             session.add(document)
             session.commit()
 
-            # ==========================================
-            # THE NEW AI PIPELINE CALL
-            # ==========================================
             ai_result = ai_extractor.run_ai_extraction(document.s3_url)
             
             extracted_data = ai_result["data"]

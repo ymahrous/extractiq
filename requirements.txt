@@ -14,3 +14,4 @@ bcrypt
 pytest
 pytest-asyncio
 httpx
+structlog
