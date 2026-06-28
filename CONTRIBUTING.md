@@ -54,7 +54,7 @@ This project follows a simple rule: be respectful. Constructive criticism is wel
    npm run dev
    ```
 
-The app will be running at `http://localhost:3000`. You will also need a running instance of the [backend API](https://github.com/ymahrous/edocai-backend), see the backend repository for setup instructions.
+The app will be running at `http://localhost:3000`. You will also need a running instance of the [backend API](https://github.com/ymahrous/edocai-backend).
 
 ---
 
