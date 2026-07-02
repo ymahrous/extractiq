@@ -76,13 +76,11 @@ def delete_account(
     subscriptions = session.exec(select(models.Subscription).where(models.Subscription.user_id == user.id)).all()
 
     for doc in documents:
-        extractions = session.exec(
-            select(models.Extraction).where(models.Extraction.document_id == doc.id)
-        ).all()
-
+        extractions = session.exec(select(models.Extraction).where(models.Extraction.document_id == doc.id)).all()
         for extraction in extractions:
             session.delete(extraction)
 
+    for doc in documents:
         storage_client.delete_from_storage(doc.filename)
         session.delete(doc)
 
@@ -94,4 +92,4 @@ def delete_account(
 
     session.delete(user)
     session.commit()
-    return None
+    return {"message": "Account deleted successfully."}
